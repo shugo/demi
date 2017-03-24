@@ -1,0 +1,141 @@
+Sat Jan 17 13:05:37 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* version 0.1.6 released.
+
+Sat Jan 17 13:04:03 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* doc/SPECIFICATION: English version.
+
+	* lib/format.dm: new file. printf, fprintf, sprintf.
+
+	* lib/enumeration.dm: new file. collect, select, etc....
+
+	* RegExp.java: new file.
+
+	* ASTLeftShiftNode.java: invoke addElement().
+
+	* SimpleNode.java (assign): return val when Hashtable.
+
+Fri Jan 16 09:57:25 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* Jump.java: new method getBackTrace().
+
+Thu Jan 15 16:48:09 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* lib/adapter.dm: module Adapter -> adapter.
+
+	* Demi.java: Global -> global, Kernel -> kernel.
+
+	* SpecialVariable.java: new file.
+
+Tue Jan 13 20:57:07 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* version 0.1.5 released.
+
+Tue Jan 13 07:28:21 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* lib/adapter.dm: new file.
+
+Fri Jan  9 23:11:06 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* version 0.1.4 released.
+
+Fri Jan  9 21:12:37 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* Scope.java: renamed from Context.java.
+
+	* Closure.java: new methods: ifTrue, ifFalse, whileTrue,
+	whileFalse, repeat.
+
+	* Closure.java (evaluate): don't create new scope.
+
+	* Closure.java (evaluate): don't catch Return.
+
+Thu Jan  8 21:30:36 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* Numeric.java (downsize): bug fix.
+
+Thu Jan  8 01:56:13 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* demi-mode.el: demi-font-lock-keywords modified.
+
+Wed Jan  7 16:42:18 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* version 0.1.3 released.
+
+Wed Jan  7 16:38:59 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* ASTVectorExpression.java: new file.
+
+	* Parser.jjt: vector expression #[...].
+
+	* DemiException.java: new file. print backtrace.
+
+	* Parser.jjt: +=,-=,*=,/=,%=,&=,|=,^=,<<=,>>=,>>>=,++,--
+
+Tue Jan  6 19:07:18 1998  SUZUKI Hisao  <suzuki@otsl.co.jp>
+
+	* bin/demi: $(DEMILIB), $* are chagend to $DEMILIB, "$@".
+	
+Tue Jan  6 17:45:05 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* Demi.java: new built-in variable version, loadPath.
+
+	* Demi.java: built-in variable scriptname is changed to programName.
+
+	* Demi.java: new module Kernel, contains built-in variables
+	and functions.
+
+	* Numeric.java: some bugs fixed.
+
+Mon Jan  5 23:48:42 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* ASTForExpression.java (evaluate): call elements() automatically.
+
+	* Range.java: no more implements Enumeration. new method
+	elements() returns Enumeration for Range.
+
+	* Range.java: supports for various number type.
+
+	* Range.java: new method contains().
+
+Mon Jan  5 21:07:47 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* version 0.1.2 released.
+
+Mon Jan  5 03:45:59 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* Parser.jjt (ArrayExpession): array expression {...} is changed
+	to #(...). (to avoid conflicts with hash expression.)
+
+	* ASTAddNode.java (evaluate): Object[] + Object[]
+
+	* ASTForExpression.java (evaluate): for expression accepts String.
+
+Sun Jan  4 15:06:10 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* version 0.1.1 released.
+
+Sun Jan  4 14:46:08 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* Demi.java: global variable Demi added.
+
+Sun Jan  4 14:04:25 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* Parser.jjt: comment '#' is changed to '//'.
+
+	* Parser.jjt: symbol prefix '@' is changed to '#'.
+
+	* BuiltInFunction.java: new file.
+
+	* NamedFunction.java: deleted.
+
+	* Closure.java (getName): returns closure$hashCode.
+
+Sun Jan  4 01:26:24 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* Closure.java (call): clone localVariables.
+
+Sat Jan  3 22:04:59 1998  Shugo Maeda  <shugo@po.aianet.ne.jp>
+
+	* version 0.1 released.

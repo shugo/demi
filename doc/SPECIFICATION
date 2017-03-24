@@ -1,0 +1,529 @@
+Demi Language Specification
+
+
+<Lexical structure>
+
+* Comment
+
+Demi comments start with // and end with newline, or start with /*
+and end with */.
+
+Example:
+
+// comment
+
+/* multiline
+         comment */
+
+* Reserved words
+
+Reserved words are:
+
+break catch class continue def else elsif end exception false
+finally for if in import instanceof module new null return this
+throw true try while
+
+But, def, elsif, end, exception, in, module can be used in member
+access.
+
+Example:
+
+in = 3       => NG
+System::in   => OK
+
+
+<Program>
+
+Demi programs are sequence of expressions.
+Each expression are delimited by semicolons.
+
+<Expression>
+
+Example:
+
+true
+(1 + 2) * 3
+foo()
+if test: ok else: ng end
+
+Expressions can be grouped by parentheses.
+
+
+* String literal
+
+Example:
+
+"abcdefg"
+
+String literals are quoted by double quote marks.
+
+
+* Character literal
+
+Example:
+
+'a'
+
+Character literals are quoted by single quote marks.
+
+
+* Number literal
+
+Example:
+
+123     Decimal integer
+0xca    Hex integer
+045     Octal integer
+123.45  floating point
+
+
+* Boolean literal
+
+true
+false
+
+
+* null
+
+null
+
+
+* Symbol
+
+#identifier
+
+Example:
+
+#abc
+#hoge
+
+
+* Array expression
+
+#( expression, ... )
+
+Constructs java.lang.Object[].
+
+Example:
+
+#("abc", 123, 'A')  //=> ("abc", 123, 'A')
+
+
+* Vector expression
+
+#[ expression, ... ]
+
+Constructs java.util.Vector.
+
+Example:
+
+#["abc", 123, 'A']  //=> [abc, 123, A]
+
+
+* Hashtable expression
+
+{ expression => expression, ... }
+
+Constructs java.util.Hashtable.
+
+Example:
+
+{"one" => 1, "two" => 2, "three" => 3} //=> {one=1, three=3, two=2}
+
+
+* Class expression
+
+class(name)
+
+Class object for the name.
+
+Example:
+
+class(java.util.Vector)
+
+
+* Variable
+
+Variables must be initialized.
+
+ [Module variable]
+
+If variables are initialized in module scope, they are module variable.
+global variable is module variable. (Toplevel module is `global' module.)
+
+You can refer module variable like this:
+
+module::varname
+
+And you can refer global variable like this:
+
+::varname
+
+
+ [Local variable]
+
+If variables are initialized in function scope, they are local variable.
+You can't refer local variables outside of function.
+
+
+variables are searched like this:
+
+scope      |
+-----------+-------------------------------------------------
+module     | module variable -> class name
+-----------+-------------------------------------------------
+function   | local variable -> module variable -> class name
+-----------+-------------------------------------------------
+
+
+* Pseudo variables
+
+this
+
+the current module.
+In the toplevel, global module.
+
+exception
+
+the exception occurred in try expression.
+
+
+* Assignment
+
+Example:
+
+foo = 1
+foo.bar += "bar"
+array[0] = 1.0
+
+
+// global variable
+a = "global";
+module Foo:
+    // module variable
+    a = "module";
+    def foo():
+	// function local variable
+	a = "function";
+	func = [
+	    // function local variable
+	    a = "closure";
+	];
+	func();
+    end;
+end;
+
+
+* Operator expressions
+
+Example:
+
+1 + 12
+"abc" + "def"
+#(1, 2, 3) + #(4, 5, 5)
+1.2 * 4.89
+20 % 6
+1 > 2 || 3 > 2
+"abc" == "abc"
+"abc" === "abc"
+
+== doesn't check identity but equality(invoke equals method).
+=== checks identity.
+
+Example:
+
+"abc" == "abc"   //=> true
+"abc" === "abc"  //=> false
+
+
+* Function call
+
+call functions.
+
+function ( expression, ... )
+
+Example:
+
+println("Hello, World!")
+
+
+* Allocation expression
+
+Constructs objects.
+
+new class ( expression, ... ) | [ expression ]
+
+Example:
+
+new class(java.lang.Object)()
+new Vector(3)
+new int[10]
+
+
+* Field / Module variable access
+
+expression . identifier     instance field
+expression :: identifier    static field / module variable
+
+Example:
+
+foo.bar
+System::in
+
+
+* Method / Module function call
+
+expression . identifier ( expression, ... )   instance method
+expression :: identifier ( expression, ... )  static method / module function
+
+Example:
+
+v.addElement("foo")
+System::exit(0)
+
+
+* Array access
+
+expression [ expression ]
+
+Refers elements of array, stirng, Vector, Hashtable, etc....
+
+
+* If expression
+
+if cond:
+    expression;...
+[ elsif cond:
+    expression;... ]
+[ else:
+    expression;... ]
+end;
+
+If cond is true, evaluate the block.
+null is treated as false.
+
+
+* While expression
+
+while cond:
+    expression;...
+end;
+
+Example:
+
+i = 1;
+while i <= 10:
+    println(i);
+    i = i + 1;
+end; 
+
+loop while cond is true.
+
+
+* For expression
+
+for identifier in (array|java.util.Enumeration):
+    expression;...
+end;
+
+Example:
+
+for i in #("foo", "bar", "baz"):
+    println(i);
+end;
+
+Iterate block for each elements.
+
+To iterate from 1 to 10:
+
+for i in 0..10:  // 0..10 is Range object.
+    println(i);
+end;
+
+
+* break
+
+break
+
+Break loop.
+
+
+* continue
+
+continue
+
+Continue loop.
+
+
+* Try expression
+
+try:
+    expression;...
+( catch <exception class>:
+    expression;... )*
+[ finally:
+    expression;... ]
+end;
+
+
+* throw
+
+throw expression
+
+
+* Synchronized expression
+
+synchronized expression:
+    expression;...
+end;
+
+
+* Function definition
+
+def identifier '(' identifier, ... ')':
+    expression;...
+end
+
+Example:
+
+def fact(n):
+    if n == 0:
+	return 1;
+    else:
+	return n * fact(n - 1);
+    end;
+end;
+
+Variables and functions share name space.
+
+Example:
+
+def foo():
+    println("foo");
+end;
+foo();          //=> foo
+println(foo);   //=> <function foo at 0x80b3bf0>
+
+Arguments can have default values.
+
+Example:
+
+def foo(x = "default"):
+    println(x);
+end;
+
+foo("bar");  //=> bar
+foo();       //=> default
+
+Recieve rest of arguments with *.
+
+def foo(first, second, *rest):
+    p(rest);  // println(inspect(rest))
+end;
+
+foo(1, 2, 3, 4, 5);   //=> (3, 4, 5)
+
+
+* return
+
+return [ expression ]
+
+Exit function.
+expression is return value, default value is null.
+
+
+* Closure
+
+'[' [ identifier, ... ':' ] expression;... ']'
+
+Example:
+
+foo = [ s: println(s) ]
+foo("hello");           //=> hello
+
+Closure is encapsulated code block with context.
+Closure looks like anonymous function.
+
+These methods are defined in Closure.
+
+* ifTrue(func)
+
+Example:
+
+[1 > 0].ifTrue([ println("1 > 0 is true") ]);
+
+* ifFalse(func)
+
+Example:
+
+[1 > 0].ifFalse([ println("1 > 0 is false") ]);
+
+* whileTrue(func)
+
+Example:
+
+n = 0;
+[n < 10].whileTrue([
+    println(n);
+    n++;
+]);
+
+* whileFalse(func)
+
+Example:
+
+n = 0;
+[n == 10].whileFalse([
+    println(n);
+    n++;
+]);
+
+* repeat(nth)
+
+Example:
+
+[ println("hello") ].repeat(3);
+
+* Module definition
+
+module identifier:
+    expression;...
+end
+
+Example:
+
+module Foo:
+    abc = "abc"
+end
+
+Modules provide name spaces.
+Modules can include other modules.
+
+Example:
+
+module Foo:
+    bar = "abc";
+end;
+
+module Baz:
+    include(Foo);
+
+    def printBar():
+	println(bar);
+    end;
+end;
+
+Baz::printBar(); //=> abc
+
+
+* import
+
+Import java packages.
+
+import <package name>
+
+Example:
+
+import java.text;   // not java.text.* but java.text
+
+NumberFormat::getInstance().format(10000);

@@ -1,0 +1,29 @@
+[Demi version 0.1]
+
+Copyright (C) 1997 前田 修吾
+
+概要
+====
+
+DemiはJavaで記述されたシンプルなスクリプト言語です。
+
+
+インストール
+============
+
+CLASSPATHにdemi/classesディレクトリを追加してください。
+インタープリタを起動するには、
+
+$ java JP.ac.osaka_u.shugo.demi.Main
+
+とタイプしてください。
+
+$ java -Ddemi.loadpath=/usr/local/lib/demi:/home/shugo/demi \
+JP.ac.osaka_u.shugo.demi.Main
+
+とすることでスクリプトの検索パスを設定することができます。
+
+demi/binには起動用のシェルスクリプトが入っています。
+
+RegExpクラスを使うには、OROMatcher(TM)をhttp://www.oroinc.com/で
+入手してください。

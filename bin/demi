@@ -1,0 +1,3 @@
+#!/bin/sh
+
+java -Ddemi.loadpath=$DEMILIB JP.ac.osaka_u.shugo.demi.Main "$@"

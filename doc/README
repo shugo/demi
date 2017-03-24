@@ -1,0 +1,25 @@
+[Demi version 0.1]
+
+Copyright (C) 1997 Shugo Maeda
+
+Overview
+========
+
+Demi is a simple scripting language written by Java.
+
+
+Install
+=======
+
+add demi/classes in your CLASSPATH.
+
+To run Demi interpreter, type:
+
+$ java JP.ac.osaka_u.shugo.demi.Main
+
+You can specify load path like this:
+
+$ java -Ddemi.loadpath=/usr/local/lib/demi:/home/shugo/demi \
+JP.ac.osaka_u.shugo.demi.Main
+
+to use RegExp class, get OROMatcher(TM) at http://www.oroinc.com/.
